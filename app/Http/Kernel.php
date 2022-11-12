@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Tenant\CheckDomainMaster;
 use App\Http\Middleware\Tenant\TenantMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -61,5 +62,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'check.domain.master' => \App\Http\Middleware\Tenant\CheckDomainMaster::class
     ];
 }

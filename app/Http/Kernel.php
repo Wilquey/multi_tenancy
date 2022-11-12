@@ -2,8 +2,9 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Tenant\CheckDomainMaster;
 use App\Http\Middleware\Tenant\TenantMiddleware;
+use App\Http\Middleware\Tenant\CheckDomainMaster;
+use App\Http\Middleware\Tenant\TenantFilesystems;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -22,6 +23,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\Tenant\TenantMiddleware::class,
+        \App\Http\Middleware\Tenant\TenantFilesystems::class,
     ];
 
     /**
@@ -62,6 +64,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'check.domain.master' => \App\Http\Middleware\Tenant\CheckDomainMaster::class
+        'check.domain.master' => \App\Http\Middleware\Tenant\CheckDomainMaster::class,
+        'not.domain.main' => \App\Http\Middleware\Tenant\NotDomainMain::class,
     ];
 }

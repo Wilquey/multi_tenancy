@@ -28,6 +28,10 @@ class TenantMiddleware
             return redirect()->route('404.tenant');
         } else if ($request->url() !=route('404.tenant') && !$manager->domainIsMain()) {
             $manager->setConnection($company);
+
+            $this->setSessionCompany($company->only([
+                'name', 'uuid',
+            ]));
         }
 
         return $next($request);
@@ -37,5 +41,10 @@ class TenantMiddleware
     {
 
         return Company::where('domain', $host)->first();
+    }
+
+    public function setSessionCompany($company)
+    {
+        session()->put('company', $company);
     }
 }

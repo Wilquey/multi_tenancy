@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Tenant\NotDomainMain;
 use App\Http\Middleware\Tenant\TenantMiddleware;
 use App\Http\Middleware\Tenant\CheckDomainMaster;
 use App\Http\Middleware\Tenant\TenantFilesystems;

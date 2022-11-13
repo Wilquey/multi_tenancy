@@ -39,7 +39,6 @@ class TenantMiddleware
 
     public function getCompany($host)
     {
-
         return Company::where('domain', $host)->first();
     }
 

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        /**
+         * Diretivas
+         */
+        Blade::if('tenant', function () {
+            return request()->getHost() != config('tenant.domain_main');
+        });
+
+        Blade::if('tenantmain', function () {
+            return request()->getHost() == config('tenant.domain_main');
+        });
     }
 
     /**
